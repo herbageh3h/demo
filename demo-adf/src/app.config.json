@@ -1,0 +1,492 @@
+{
+    "$schema": "../../lib/core/app-config/schema.json",
+    "ecmHost": "http://{hostname}:{port}",
+    "bpmHost": "http://{hostname}:{port}",
+    "contextRootBpm": "activiti-app",
+    "application": {
+        "name": "Alfresco ADF Application"
+    },
+    "languages": [
+        {
+            "key": "en",
+            "label": "English"
+        },
+        {
+            "key": "fr",
+            "label": "French"
+        },
+        {
+            "key": "de",
+            "label": "German"
+        },
+        {
+            "key": "it",
+            "label": "Italian"
+        },
+        {
+            "key": "es",
+            "label": "Spanish"
+        },
+        {
+            "key": "ja",
+            "label": "Japanese"
+        },
+        {
+            "key": "nl",
+            "label": "Dutch"
+        },
+        {
+            "key": "pt-BR",
+            "label": "Brazilian Portuguese"
+        },
+        {
+            "key": "nb",
+            "label": "Norwegian"
+        },
+        {
+            "key": "ru",
+            "label": "Russian"
+        },
+        {
+            "key": "zh-CN",
+            "label": "Simplified Chinese"
+        }
+    ],
+    "search": {
+      "limits": {
+        "permissionEvaluationTime": null,
+        "permissionEvaluationCount": null
+      },
+      "filterQueries": [
+        { "query": "TYPE:'cm:folder' OR TYPE:'cm:content'" },
+        { "query": "NOT cm:creator:System" }
+      ],
+      "facetFields": {
+        "facets": [
+          { "field": "content.mimetype", "mincount": 1, "label": "Type" },
+          { "field": "content.size", "mincount": 1, "label": "Size" },
+          { "field": "creator", "mincount": 1, "label": "Creator" },
+          { "field": "modifier", "mincount": 1, "label": "Modifier" }
+        ]
+      },
+      "facetQueries": [
+        { "query": "created:2018", "label": "Created This Year" },
+        { "query": "content.mimetype", "label": "Type" },
+        { "query": "content.size:[0 TO 10240]", "label": "Size: xtra small"},
+        { "query": "content.size:[10240 TO 102400]", "label": "Size: small"},
+        { "query": "content.size:[102400 TO 1048576]", "label": "Size: medium" },
+        { "query": "content.size:[1048576 TO 16777216]", "label": "Size: large" },
+        { "query": "content.size:[16777216 TO 134217728]", "label": "Size: xtra large" },
+        { "query": "content.size:[134217728 TO MAX]", "label": "Size: XX large" }
+      ],
+      "query": {
+        "categories": [
+          {
+          "id": "broken",
+          "name": "Broken Facet",
+          "enabled": false,
+          "expanded": false,
+          "component": {
+            "selector": "adf-search-text",
+            "settings": {
+              "field": "fieldname"
+            }
+          }
+        },
+        {
+          "id": "queryName",
+          "name": "Name",
+          "enabled": true,
+          "expanded": true,
+          "component": {
+            "selector": "adf-search-text",
+            "settings": {
+              "pattern": "cm:name:'(.*?)'",
+              "field": "cm:name",
+              "placeholder": "Enter the name"
+            }
+          }
+        },
+        {
+          "id": "queryFields",
+          "name": "Fields",
+          "enabled": true,
+          "expanded": false,
+          "component": {
+            "selector": "adf-search-fields",
+            "settings": {
+              "field": null,
+              "options": [
+                { "name": "Name", "value": "name", "fields": ["name"], "default": true },
+                { "name": "File Size", "value": "content.sizeInBytes", "fields": ["content"], "default": true },
+                { "name": "Modified On", "value": "modifiedAt", "fields": ["modifiedAt"], "default": true },
+                { "name": "Modified By", "value": "modifiedByUser.displayName", "fields": ["modifiedByUser"], "default": true }
+              ]
+            }
+          }
+        },
+        {
+          "id": "queryType",
+          "name": "Type",
+          "enabled": true,
+          "expanded": false,
+          "component": {
+            "selector": "adf-search-radio",
+            "settings": {
+              "field": null,
+              "options": [
+                { "name": "None", "value": "", "default": true },
+                { "name": "All", "value": "TYPE:'cm:folder' OR TYPE:'cm:content'" },
+                { "name": "Folder", "value": "TYPE:'cm:folder'" },
+                { "name": "Document", "value": "TYPE:'cm:content'" }
+              ]
+            }
+          }
+        },
+        {
+          "id": "queryLocations",
+          "name": "Locations",
+          "enabled": true,
+          "expanded": false,
+          "component": {
+            "selector": "adf-search-scope-locations",
+            "settings": {
+              "field": null,
+              "options": [
+                { "name": "Default", "value": "nodes", "default": true },
+                { "name": "Nodes", "value": "nodes" },
+                { "name": "Deleted Nodes", "value": "deleted-nodes" },
+                { "name": "Versions", "value": "versions" }
+              ]
+            }
+          }
+        }
+        ]
+      }
+    },
+    "pagination": {
+        "size": 25,
+        "supportedPageSizes": [ 5, 10, 15, 20 ]
+    },
+    "files": {
+        "excluded": [".DS_Store", "desktop.ini", ".git"]
+    },
+    "logLevel": "trace",
+    "activiti": {
+        "rest": {
+            "fields": [
+                {
+                    "processId": "0",
+                    "taskId": "7501",
+                    "fieldId": "label10",
+                    "values": [
+                        {
+                            "id": "f1",
+                            "name": "Field 1"
+                        },
+                        {
+                            "id": "f2",
+                            "name": "Field 2"
+                        },
+                        {
+                            "id": "f3",
+                            "name": "Field 3"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "document-list": {
+        "presets": {
+            "-trashcan-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "path",
+                    "type": "location",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.LOCATION",
+                    "format": "/files",
+                    "sortable": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "type": "fileSize",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SIZE",
+                    "sortable": true
+                },
+                {
+                    "key": "archivedAt",
+                    "type": "date",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.DELETED_ON",
+                    "format": "timeAgo",
+                    "sortable": true
+                },
+                {
+                    "key": "archivedByUser.displayName",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.DELETED_BY",
+                    "sortable": true
+                }
+            ],
+            "-sites-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "title",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "visibility",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.STATUS",
+                    "sortable": true
+                }
+            ],
+            "-mysites-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "title",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "visibility",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.STATUS",
+                    "sortable": true
+                }
+            ],
+            "-favorites-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "path",
+                    "type": "location",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.LOCATION",
+                    "format": "/files",
+                    "sortable": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "type": "fileSize",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SIZE",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedAt",
+                    "type": "date",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON",
+                    "format": "timeAgo",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedByUser.displayName",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY",
+                    "sortable": true
+                }
+            ],
+            "-recent-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "path",
+                    "type": "location",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.LOCATION",
+                    "cssClass": "ellipsis-cell",
+                    "format": "/files",
+                    "sortable": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "type": "fileSize",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SIZE",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedAt",
+                    "type": "date",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON",
+                    "format": "timeAgo",
+                    "sortable": true
+                }
+            ],
+            "-sharedlinks-": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "path",
+                    "type": "location",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.LOCATION",
+                    "cssClass": "ellipsis-cell",
+                    "format": "/files",
+                    "sortable": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "type": "fileSize",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SIZE",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedAt",
+                    "type": "date",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON",
+                    "format": "timeAgo",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedByUser.displayName",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY",
+                    "sortable": true
+                },
+                {
+                    "key": "sharedByUser.displayName",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SHARED_BY",
+                    "sortable": true
+                }
+            ],
+            "default": [
+                {
+                    "key": "$thumbnail",
+                    "type": "image",
+                    "srTitle": "ADF-DOCUMENT-LIST.LAYOUT.THUMBNAIL",
+                    "sortable": false
+                },
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.NAME",
+                    "cssClass": "full-width ellipsis-cell",
+                    "sortable": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "type": "fileSize",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.SIZE",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedAt",
+                    "type": "date",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON",
+                    "format": "timeAgo",
+                    "sortable": true
+                },
+                {
+                    "key": "modifiedByUser.displayName",
+                    "type": "text",
+                    "title": "ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY",
+                    "sortable": true
+                }
+            ]
+        }
+    },
+    "adf-task-list": {
+        "presets": {
+            "default": [
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF_TASK_LIST.PROPERTIES.NAME",
+                    "sortable": true
+                }
+            ]
+        }
+    },
+    "adf-start-process": {
+        "name": "My Default Name",
+        "processDefinitionName": "My default process def name"
+    },
+    "adf-process-list": {
+        "presets": {
+            "default": [
+                {
+                    "key": "name",
+                    "type": "text",
+                    "title": "ADF_PROCESS_LIST.PROPERTIES.NAME",
+                    "sortable": true
+                },
+                {
+                    "key": "created",
+                    "type": "text",
+                    "title": "ADF_PROCESS_LIST.PROPERTIES.CREATED",
+                    "cssClass": "hidden",
+                    "sortable": true
+                }
+            ]
+        }
+    },
+    "content-metadata": {
+        "presets": {
+            "default": {
+                "exif:exif": "*"
+            }
+        }
+    },
+    "adf-version-manager": {
+      "allowComments": true,
+      "allowDownload": true
+    }
+}

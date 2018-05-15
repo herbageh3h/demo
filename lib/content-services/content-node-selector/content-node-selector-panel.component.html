@@ -1,0 +1,100 @@
+<div class="adf-content-node-selector-content" (node-select)="onNodeSelect($event)">
+    <mat-form-field floatPlaceholder="never" class="adf-content-node-selector-content-input">
+        <input matInput
+            id="searchInput"
+            [formControl]="searchInput"
+            type="text"
+            placeholder="{{'NODE_SELECTOR.SEARCH' | translate}}"
+            [value]="searchTerm"
+            data-automation-id="content-node-selector-search-input">
+
+        <mat-icon *ngIf="searchTerm.length > 0"
+            matSuffix (click)="clear()"
+            class="adf-content-node-selector-content-input-icon"
+            data-automation-id="content-node-selector-search-clear">clear
+        </mat-icon>
+
+        <mat-icon *ngIf="searchTerm.length === 0"
+            matSuffix
+            class="adf-content-node-selector-content-input-icon"
+            data-automation-id="content-node-selector-search-icon">search
+        </mat-icon>
+
+    </mat-form-field>
+
+    <adf-sites-dropdown
+        class="full-width"
+        (change)="siteChanged($event)"
+        [placeholder]="'NODE_SELECTOR.SELECT_LOCATION'"
+        [hideMyFiles]="dropdownHideMyFiles"
+        [siteList]="dropdownSiteList"
+        data-automation-id="content-node-selector-sites-combo">
+    </adf-sites-dropdown>
+
+    <adf-toolbar>
+        <adf-toolbar-title>
+            <ng-container *ngIf="!showBreadcrumbs()">
+                <span class="search-results-label">{{ 'NODE_SELECTOR.SEARCH_RESULTS' | translate }}</span>
+            </ng-container>
+            <adf-dropdown-breadcrumb *ngIf="showBreadcrumbs()"
+                class="adf-content-node-selector-content-breadcrumb"
+                (navigate)="clearSearch()"
+                [target]="documentList"
+                [transform]="breadcrumbTransform"
+                [folderNode]="breadcrumbFolderNode"
+                data-automation-id="content-node-selector-content-breadcrumb">
+            </adf-dropdown-breadcrumb>
+        </adf-toolbar-title>
+    </adf-toolbar>
+
+    <div
+        class="adf-content-node-selector-content-list"
+        [class.adf-content-node-selector-content-list-searchLayout]="showingSearchResults"
+        data-automation-id="content-node-selector-content-list">
+        <adf-document-list
+            #documentList
+            adf-highlight
+            adf-highlight-selector="adf-name-location-cell .adf-name-location-cell-name"
+            [showHeader]="false"
+            [node]="nodes"
+            [maxItems]="pageSize"
+            [rowFilter]="rowFilter"
+            [imageResolver]="imageResolver"
+            [currentFolderId]="folderIdToShow"
+            selectionMode="single"
+            [contextMenuActions]="false"
+            [contentActions]="false"
+            [allowDropFiles]="false"
+            (folderChange)="onFolderChange()"
+            (ready)="onFolderLoaded($event)"
+            (node-dblclick)="onNodeDoubleClick($event)"
+            data-automation-id="content-node-selector-document-list">
+            <empty-folder-content>
+                <ng-template>
+                    <div>{{ 'NODE_SELECTOR.NO_RESULTS' | translate }}</div>
+                </ng-template>
+            </empty-folder-content>
+
+            <data-columns>
+                <data-column key="$thumbnail" type="image"></data-column>
+                <data-column key="name" type="text" class="full-width ellipsis-cell">
+                    <ng-template let-context>
+                        <adf-name-location-cell [row]="context.row"></adf-name-location-cell>
+                    </ng-template>
+                </data-column>
+                <data-column key="modifiedAt" type="date" format="timeAgo" class="adf-content-selector-modified-cell"></data-column>
+                <data-column key="modifiedByUser.displayName" type="text" class="adf-content-selector-modifier-cell"></data-column>
+                <data-column key="visibility" type="text"></data-column>
+            </data-columns>
+
+        </adf-document-list>
+
+        <adf-infinite-pagination
+            [target]="documentList"
+            [loading]="loadingSearchResults"
+            (loadMore)="getNextPageOfSearch($event)"
+            data-automation-id="content-node-selector-search-pagination">
+            {{ 'ADF-DOCUMENT-LIST.LAYOUT.LOAD_MORE' | translate }}
+        </adf-infinite-pagination>
+    </div>
+</div>

@@ -18,6 +18,9 @@ import org.apache.commons.io.FileUtils;
 
 public class BpmnModelGenerator {
 	public static BpmnModel simple() {
+        boolean a = true;
+        String s = "hello";
+
 		BpmnModel model = new BpmnModel();
 
 		Process proc = new Process();

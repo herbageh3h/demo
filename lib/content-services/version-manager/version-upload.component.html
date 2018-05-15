@@ -1,0 +1,12 @@
+<adf-upload-version-button
+    data-automation-id="adf-new-version-file-upload"
+    class="adf-new-version-file-upload"
+    staticTitle="{{ 'ADF_VERSION_LIST.ACTIONS.UPLOAD.TITLE' | translate }}"
+    [node]="node"
+    [disabled]="!canUpload()"
+    [rootFolderId]="node.parentId"
+    tooltip="{{ 'ADF_VERSION_LIST.ACTIONS.UPLOAD.TOOLTIP' | translate }}"
+    [versioning]="true"
+    (success)="success.emit($event)"
+    (error)="error.emit($event)">
+</adf-upload-version-button>

@@ -1,0 +1,70 @@
+
+@mixin adf-breadcrumb-dropdown-theme($theme) {
+    $primary: map-get($theme, primary);
+    $dropdownHorizontalOffset: 30px;
+
+    .adf {
+        &-dropdown-breadcrumb {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        &-dropdown-breadcumb-trigger {
+            cursor: pointer;
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+
+        &-dropdown-breadcrumb-item-chevron {
+            margin-top: 5px;
+        }
+
+        &-dropdown-breadcumb-trigger.isRoot {
+            cursor: not-allowed;
+        }
+
+        &-dropdown-breadcrumb-path {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            margin-top: 35px;
+            margin-left: -$dropdownHorizontalOffset;
+
+            &.mat-select {
+                width: 0;
+            }
+        }
+
+        &-current-folder {
+            text-align: left;
+            line-height: 33px;
+            margin-left: $dropdownHorizontalOffset;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            width: 75%;
+        }
+
+        &-current-folder.isRoot {
+            margin-left: 0;
+        }
+
+        &-dropdown-breadcrumb-path-option.mat-option {
+            height: 28px;
+            line-height: 28px;
+            padding: 0 12px;
+            font-size: 13px;
+        }
+
+        &-dropdown-breadcrumb-path-option.mat-option:first-child {
+            padding-top: 4px;
+        }
+
+        &-dropdown-breadcrumb-path-option.mat-option:last-child {
+            padding-bottom: 4px;
+        }
+    }
+}

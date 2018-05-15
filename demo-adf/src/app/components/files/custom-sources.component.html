@@ -1,0 +1,17 @@
+<adf-toolbar>
+    <adf-toolbar-title>
+        <mat-form-field>
+            <mat-select [(ngModel)]="selectedSource">
+                <mat-option *ngFor="let source of sources" [value]="source.value">
+                    {{ source.title }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </adf-toolbar-title>
+</adf-toolbar>
+<adf-document-list
+    #customSourcesDocumentList
+    [currentFolderId]="selectedSource"
+    locationFormat="/files"
+    selectionMode="multiple">
+</adf-document-list>

@@ -1,0 +1,146 @@
+@mixin adf-task-list-start-task-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $header-border: 1px solid mat-color($foreground, divider);
+
+    .adf-new-task-heading {
+        padding: 12px 20px;
+        font-weight: bold;
+        border-bottom: $header-border;
+        font-size: 18px;
+        float: left;
+        text-align: left;
+        width: calc(100% - 40px);
+    }
+
+    .adf-new-task-layout-card {
+        width: 66%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        &-content {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            .adf-grid-row {
+                display: flex;
+                flex-flow: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-bottom: 8px;
+            }
+
+            .adf-grid-column {
+                display: flex;
+                flex-flow: column;
+            }
+
+            .adf-grid-full-width {
+                width: 100%;
+            }
+
+            .adf-grid-half-width {
+                width: 49%;
+            }
+        }
+    }
+
+    .adf-new-task-footer {
+        padding: 4px;
+        font-size: 18px;
+        border-top: 1px solid #eee;
+        float: left;
+        width: calc(100% - 40px);
+        text-align: right;
+    }
+
+    .adf-mat-select {
+        padding-top: 0px;
+    }
+
+    adf-start-task {
+        .adf {
+
+            &-new-task-footer {
+                .mat-button {
+                    text-transform: uppercase !important;
+                }
+            }
+
+            &-start-task-input-container .mat-input-wrapper {
+                padding-top: 8px;
+            }
+
+            &-error-text-container {
+                position: absolute;
+                height: 20px;
+                margin-top: 12px;
+                width: 100%;
+
+                & > div {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: flex-start;
+                }
+            }
+
+            &-error-text {
+                padding-right: 8px;
+                height: 16px;
+                font-size: 12px;
+                line-height: 1.33;
+                color: mat-color($warn);
+                width: auto;
+            }
+
+            &-error-icon {
+                font-size: 17px;
+                color: mat-color($warn);
+            }
+
+            &-label {
+                color: rgb(186, 186, 186);;
+            }
+
+            &-invalid {
+
+                .mat-input-underline {
+                    background-color: #f44336 !important;
+                }
+
+                .adf-file {
+                    border-color: mat-color($warn);
+                }
+
+                .mat-input-prefix {
+                    color: mat-color($warn);
+                }
+
+                .adf-input {
+                    border-color: mat-color($warn);
+                }
+
+                .adf-label {
+                    color: mat-color($warn);
+                    &:after {
+                        background-color: mat-color($warn);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .adf-new-task-layout-card {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
