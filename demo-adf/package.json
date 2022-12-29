@@ -92,7 +92,7 @@
     "moment": "2.20.1",
     "moment-es6": "^1.0.0",
     "ng2-charts": "1.6.0",
-    "pdfjs-dist": "2.0.265",
+    "pdfjs-dist": "2.16.105",
     "raphael": "2.2.7",
     "reflect-metadata": "0.1.10",
     "rxjs": "5.5.2",
@@ -100,7 +100,7 @@
     "zone.js": "0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.5",
+    "@angular/cli": "15.0.4",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
